@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>STYLE HUB - Full Featured E-commerce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+    <!-- Header Start -->
+    <header class="header bg-dark py-2 px-3">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <!-- Left: Logo + Brand -->
+            <a href="#" class="d-flex align-items-center text-decoration-none" id="logoBtn">
+                <span class="logo-btn me-2 d-flex align-items-center justify-content-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="TrendyApparel Logo" width="32"
+                        height="32">
+                </span>
+                <span class="fw-bold text-accent fs-4">Style Hub</span>
+            </a>
+
+            <!-- Center: Search Bar -->
+            <form id="searchForm" class="d-flex flex-grow-1 mx-4" role="search" style="max-width: 500px;">
+                <input class="form-control me-2" type="search" placeholder="Search products"
+                    aria-label="Search products" id="searchInput">
+                <button class="btn btn-accent" type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+            </form>
+
+            <!-- Right: Welcome, Wishlist, Order History, Cart, Auth Buttons -->
+            <div class="d-flex align-items-center gap-3">
+                
+                <!-- Cart Button -->
+                <button id="cartBtn" class="btn btn-accent position-relative" aria-label="Shopping cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        id="cartCount">0</span>
+                </button>
+                <!-- Auth Buttons Container (for login/signup/logout, JS will populate) -->
+                <div id="headerButtonsContainer" class="d-flex align-items-center gap-2"></div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Category & Filter Bar -->
+    <div class="category-bar bg-dark py-2 px-3 d-flex flex-wrap gap-2 justify-content-center align-items-center"
+        role="navigation" aria-label="Product categories">
+        <button class="btn btn-outline-accent category-btn active" data-category="All" aria-pressed="true">All</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Men" aria-pressed="false">Men</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Women" aria-pressed="false">Women</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Kids" aria-pressed="false">Kids</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Accessories"
+            aria-pressed="false">Accessories</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Sarees" aria-pressed="false">Sarees</button>
+        <button class="btn btn-outline-accent category-btn" data-category="Shoes" aria-pressed="false">Shoes</button>
+
+        <select class="form-select form-select-sm ms-3 filter-select" id="brandFilter" aria-label="Filter by brand">
+            <option value="All">All Brands</option>
+            <option value="Zara">Zara</option>
+            <option value="VIRGIO">VIRGIO</option>
+            <option value="Bappa">Bappa</option>
+            <option value="H&M">H&M</option>
+            <option value="Savana">Savana</option>
+            <option value="Blue Stone">Blue Stone</option>
+            <option value="Shein">Shein</option>
+            <option value="Reya">Reya</option>
+            <option value="Veirdo">Veirdo</option>
+            <option value="Roadster">Roadster</option>
+            <option value="Le Nino">Le Nino</option>
+            <option value="Ollington">Ollington</option>
+            <option value="AJ Dezines">AJ Dezines</option>
+            <option value="Limeroad">Limeroad</option>
+            <option value="Pantaloons">Pantaloons</option>
+            <option value="Bata">Bata</option>
+            <option value="Adida">Adidas</option>
+            <option value="Mochi">Mochi</option>
+            <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+            <option value="Allen Solly">Allen Solly</option>
+            <option value="Devnaagri">Devnaagri</option>
+            <option value="Ajmera">Ajmera</option>
+            <option value="Sabyasachi">Sabyasachi</option>
+            <option value="Bunkala">Bunkala</option>
+            <option value="Hush Puppies">Hush Puppies</option>
+        </select>
+        <select class="form-select form-select-sm ms-2 filter-select" id="colorFilter" aria-label="Filter by color">
+            <option value="All">All Colors</option>
+            <option value="Green">Green</option>
+            <option value="Blue">Blue</option>
+            <option value="Maroon">Maroon</option>
+            <option value="Beige">Beige</option>
+            <option value="Cream">Cream</option>
+            <option value="Purple">Purple</option>
+            <option value="Pink">Pink</option>
+            <option value="Wood">Wood</option>
+            <option value="Brown">Brown</option>
+            <option value="Gold">Gold</option>
+            <option value="Silver">Silver</option>
+            <option value="White">White</option>
+            <option value="Olive">Olive</option>
+            <option value="Grey">Grey</option>
+            <option value="Red">Red</option>
+            <option value="Black">Black</option>
+            <option value="Orange">Orange</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Multicolor">Multicolor</option>
+        </select>
+        <input type="range" min="0" max="100000" step="100" value="100000" class="form-range ms-3" id="priceFilter"
+            aria-label="Max price filter" style="width:120px;">
+        <span class="text-accent ms-1" id="priceFilterLabel">₹100000</span>
+    </div>
+
+    <!-- Main Content Wrapper (for toggling sections) -->
+    <div id="mainContent">
+
+        <!-- Hero Section -->
+        <section class="hero-section d-flex align-items-center justify-content-center">
+            <div class="container hero-content text-center position-relative">
+                <h1 class="display-2 fw-bold mb-3 hero-title">
+                    <span class="gradient-text">Discover Your Style</span>
+                </h1>
+                <p class="lead mb-4 hero-subtitle">
+                    <i class="fa fa-star text-accent me-2"></i>
+                    Trendy, Comfortable, and Affordable Clothing for Everyone
+                    <i class="fa fa-star text-accent ms-2"></i>
+                </p>
+                <a href="#collection" class="btn btn-accent btn-lg shadow hero-cta">Shop Collection</a>
+                <div class="hero-shapes">
+                    <span class="hero-circle"></span>
+                    <span class="hero-dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Collection -->
+        <section id="collection" class="py-5 bg-dark">
+            <div class="container">
+                <h2 class="text-center text-accent mb-5 fw-bold">Featured Collection</h2>
+                <div class="row g-4" id="productGrid">
+                    <!-- Product cards will be injected by JS -->
+                </div>
+                <!-- Show More Button -->
+                <div class="text-center my-4">
+                    <button id="showMoreBtn" class="btn btn-accent" style="display:none;">Show More</button>
+                </div>
+        </section>
+
+        <!-- Contact Section (as previously enhanced) -->
+        <section id="contact" class="contact-section container my-5">
+            <div class="row g-0 bg-contact rounded-4 shadow-lg overflow-hidden">
+                <div class="col-md-5 d-flex flex-column justify-content-center align-items-center p-4 contact-info">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Logo" width="64"
+                        class="mb-3 logo-glow">
+                    <h3 class="fw-bold text-accent mb-3">Contact Us</h3>
+                    <ul class="list-unstyled mb-4 contact-list">
+                        <li><i class="fa fa-map-marker-alt text-accent me-2"></i>123 Fashion Lane, Mumbai</li>
+                        <li><i class="fa fa-phone text-accent me-2"></i>+91 98765 43210</li>
+                        <li><i class="fa fa-envelope text-accent me-2"></i>support@trendyapparel.com</li>
+                    </ul>
+                    <div>
+                        <a href="#" class="me-2 text-accent fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="me-2 text-accent fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2 text-accent fs-4"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-7 p-4">
+                    <form action="https://formspree.io/f/xeokzjjb" method="POST" class="glass-form" id="contactForm">
+                        <h5 class="mb-3 text-accent fw-bold">Send Us a Message</h5>
+                        <div class="form-floating mb-3 input-group">
+                            <span class="input-group-text bg-white text-accent border-0"><i
+                                    class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" id="contactName" name="name" placeholder="Your Name"
+                                required>
+                            <label for="contactName">Your Name</label>
+                        </div>
+                        <div class="form-floating mb-3 input-group">
+                            <span class="input-group-text bg-white text-accent border-0"><i
+                                    class="fa fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="contactEmail" name="email"
+                                placeholder="Your Email" required>
+                            <label for="contactEmail">Your Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="contactMessage" name="message" placeholder="Your Message"
+                                style="height: 100px" required></textarea>
+                            <label for="contactMessage">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">Send Message</button>
+                        <div id="contactMsg" class="form-msg mt-2"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Form in Footer -->
+        <footer class="footer mt-auto pt-5 pb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h5 class="text-accent">Feedback</h5>
+                        <form action="https://formspree.io/f/xpwrlazz" method="POST"
+                            class="feedback-form glass-form p-4 rounded-3 shadow" id="feedbackForm">
+                            <div class="form-floating mb-3 input-group">
+                                <span class="input-group-text bg-white text-accent border-0"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" id="feedbackName" name="name"
+                                    placeholder="Your Name" required>
+                                <label for="feedbackName">Your Name</label>
+                            </div>
+                            <div class="form-floating mb-3 input-group">
+                                <span class="input-group-text bg-white text-accent border-0"><i
+                                        class="fa fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="feedbackEmail" name="email"
+                                    placeholder="Your Email" required>
+                                <label for="feedbackEmail">Your Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="feedbackMessage" name="message"
+                                    placeholder="Your Feedback" style="height: 100px" required></textarea>
+                                <label for="feedbackMessage">Your Feedback</label>
+                            </div>
+                            <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">Send Feedback</button>
+                            <div id="feedbackMsg" class="form-msg mt-2"></div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        <div class="feedback-illustration"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ALL PRODUCTS SECTION (hidden by default) -->
+    <div id="allProductsSection" class="d-none">
+        <div class="container my-4">
+            <h2 class="text-center text-accent mb-5 fw-bold">All Products</h2>
+            <div class="row g-4" id="allProductsGrid"></div>
+            <div class="text-center my-4">
+                <button id="backToMainBtn" class="btn btn-outline-accent">Back to Main Page</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Amazon-style Cart Page Overlay -->
+    <div id="cartPage" class="cart-page d-none">
+        <div class="container py-5">
+            <button id="closeCartPage" class="btn btn-outline-accent mb-4 float-end"><i class="fa fa-times"></i>
+                Close</button>
+            <div id="cartSummary" class="cart-summary mb-4 d-none">
+                <h2 class="text-accent mb-3">Your Cart</h2>
+                <div id="cartItemsContainer"></div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <span class="fw-bold">Subtotal: <span id="cartSubtotal" class="text-accent"></span></span>
+                    <button id="proceedToBuyBtn" class="btn btn-accent">Proceed to Buy</button>
+                </div>
+                <button id="continueShoppingBtn" class="btn btn-outline-accent mt-3">Continue Shopping</button>
+            </div>
+            <div id="cartEmptyMsg" class="cart-empty d-none">
+                <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart" width="80">
+                <p>Your cart is empty!</p>
+                <button id="emptyContinueShoppingBtn" class="btn btn-accent mt-3">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Buy Now Modal -->
+    <div class="modal fade" id="buyNowModal" tabindex="-1" aria-labelledby="buyNowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="buyNowModalLabel">Buy Now</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center" id="buyNowModalBody">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-accent" data-bs-dismiss="modal">Continue
+                        Shopping</button>
+                    <button type="button" class="btn btn-accent" id="goToCartFromBuyNow">Go to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proceed to Buy Confirmation Modal -->
+    <div class="modal fade" id="proceedModal" tabindex="-1" aria-labelledby="proceedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="proceedModalLabel">Order Confirmation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fa fa-check-circle text-accent mb-3" style="font-size: 3rem;"></i>
+                    <h4 class="mb-2">Thank you for your purchase!</h4>
+                    <p class="mb-0">Your order has been placed successfully.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-accent" data-bs-dismiss="modal" id="closeProceedModal">Continue
+                        Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Modal (required for auth.js to work) -->
+    <div id="authModal" class="auth-modal">
+        <div class="modal-content">
+            <span id="closeAuthModalBtn" class="close-button">&times;</span>
+            <div class="auth-form">
+                <h2 id="authModalTitle">Login</h2>
+                <form id="authForm">
+                    <input id="usernameInput" type="text" placeholder="Username" required>
+                    <input id="passwordInput" type="password" placeholder="Password" required>
+                    <button id="authSubmitBtn" class="btn" type="submit">Login</button>
+                </form>
+                <div id="authMessageDisplay" class="auth-message-display"></div>
+                <p id="authToggleText">
+                    Don't have an account? <a href="#" id="switchToSignupLink">Signup</a>
+                </p>
+                <a href="#" id="forgotPasswordLink" class="forgot-password">Forgot password?</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Main JS -->
+    <script src="main.js"></script>
+    <script src="auth.js" type="module"></script>
+
+</body>
+
+</html>

@@ -1,4 +1,7 @@
 A Style Hub - Your Destination for Modern Apparel
+
+Website : https://sjshreya-style-hub.netlify.app/
+
 Project Description
 A Style Hub is a dynamic e-commerce platform dedicated to modern apparel. Explore curated, fresh collections featuring the latest fashion trends for all tastes. Enjoy a seamless, user-friendly shopping experience with intuitive navigation and secure checkout. This project highlights responsive design and robust features for online clothing retail. Elevate your style effortlessly and stay trendy today!
 
